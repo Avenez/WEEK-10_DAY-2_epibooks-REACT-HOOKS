@@ -1,35 +1,37 @@
 import { Component } from "react";
 import SingleBook from "./SingleBook";
 import { Col, Form, Row } from "react-bootstrap";
-
+import CommentArea from "./CommentArea";
 class BookList extends Component {
   state = {
+    bookAsin: "",
     searchQuery: "",
+  };
+
+  getSelection = (bookCode) => {
+    this.setState({ bookAsin: bookCode });
   };
 
   render() {
     return (
       <>
         <Row className="justify-content-center mt-5">
-          <Col xs={12} md={4} className="text-center">
-            {/* <Form.Group>
-              <Form.Control
-                type="search"
-                placeholder="Cerca un libro"
-                value={this.state.searchQuery}
-                onChange={(e) => this.setState({ searchQuery: e.target.value })}
-              />
-            </Form.Group> */}
-          </Col>
+          <Col xs={12} md={4} className="text-center"></Col>
         </Row>
         <Row xs={4} className="g-2 mt-3">
-          {this.props.books
-            .filter((b) => b.title.toLowerCase().includes(this.state.searchQuery))
-            .map((b) => (
-              <Col xs={12} md={4} key={b.asin}>
-                <SingleBook book={b} />
-              </Col>
-            ))}
+          <Col lg={8}>
+            <Row>
+              {this.props.books
+                .filter((b) => b.title.toLowerCase().includes(this.state.searchQuery))
+                .map((b) => (
+                  <Col xs={12} md={4} key={b.asin}>
+                    <SingleBook book={b} getSelection={this.getSelection} />
+                  </Col>
+                ))}
+            </Row>
+          </Col>
+
+          <Col lg={4}>{this.state.bookAsin && <CommentArea asin={this.state.bookAsin} />}</Col>
         </Row>
       </>
     );
