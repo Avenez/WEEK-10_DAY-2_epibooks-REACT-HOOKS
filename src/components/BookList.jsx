@@ -10,7 +10,7 @@ class BookList extends Component {
   };
 
   borderSelection = () => {
-    this.setState({ selected: !this.state.selected });
+    this.setState({ selected: true });
   };
 
   getSelection = (bookCode) => {
