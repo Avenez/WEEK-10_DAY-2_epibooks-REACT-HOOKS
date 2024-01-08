@@ -6,6 +6,11 @@ class BookList extends Component {
   state = {
     bookAsin: "",
     searchQuery: "",
+    selected: false,
+  };
+
+  borderSelection = () => {
+    this.setState({ selected: !this.state.selected });
   };
 
   getSelection = (bookCode) => {
@@ -25,7 +30,13 @@ class BookList extends Component {
                 .filter((b) => b.title.toLowerCase().includes(this.state.searchQuery))
                 .map((b) => (
                   <Col xs={12} md={4} key={b.asin}>
-                    <SingleBook book={b} getSelection={this.getSelection} />
+                    <SingleBook
+                      book={b}
+                      getSelection={this.getSelection}
+                      bookId={this.state.bookAsin}
+                      selected={this.state.selected}
+                      borderSelection={this.borderSelection}
+                    />
                   </Col>
                 ))}
             </Row>
