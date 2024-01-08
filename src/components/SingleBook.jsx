@@ -12,8 +12,6 @@ class SingleBook extends Component {
     this.props.getSelection(bookAsin);
   };
 
-  componentDidUpdate;
-
   render() {
     return (
       <>
