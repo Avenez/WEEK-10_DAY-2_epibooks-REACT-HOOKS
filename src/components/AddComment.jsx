@@ -1,20 +1,16 @@
-import { Component, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 const AddComment = (props) => {
-  // state = {
-  //   comment: {
-  //     comment: "",
-  //     rate: 1,
-  //     elementId: this.props.asin,
-  //   },
-  // };
-
   const [comment, setComment] = useState({
     comment: "",
     rate: 1,
     elementId: props.asin,
   });
+
+  useEffect(() => {
+    setComment({ ...comment, elementId: props.asin });
+  }, [props.asin]);
 
   const sendComment = async (e) => {
     e.preventDefault();
@@ -31,11 +27,9 @@ const AddComment = (props) => {
       if (response.ok) {
         alert("Recensione inviata!");
         setComment({
-          comment: {
-            comment: "",
-            rate: 1,
-            elementId: props.asin,
-          },
+          comment: "",
+          rate: 1,
+          elementId: props.asin,
         });
       } else {
         throw new Error("Qualcosa è andato storto");
@@ -47,19 +41,17 @@ const AddComment = (props) => {
 
   return (
     <div className="my-3">
-      <Form onSubmit={() => sendComment}>
+      <Form onSubmit={sendComment}>
         <Form.Group className="mb-2">
           <Form.Label>Recensione</Form.Label>
           <Form.Control
-            type="text"
+            type="comment"
             placeholder="Inserisci qui il testo"
             value={comment.comment}
             onChange={(e) =>
               setComment({
-                comment: {
-                  ...comment,
-                  comment: e.target.value,
-                },
+                ...comment,
+                comment: e.target.value,
               })
             }
           />
@@ -71,10 +63,8 @@ const AddComment = (props) => {
             value={comment.rate}
             onChange={(e) =>
               setComment({
-                comment: {
-                  ...comment,
-                  rate: e.target.value,
-                },
+                ...comment,
+                rate: e.target.value,
               })
             }
           >

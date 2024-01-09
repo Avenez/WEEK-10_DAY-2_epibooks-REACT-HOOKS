@@ -5,12 +5,6 @@ import Loading from "./Loading";
 import Error from "./Error";
 
 const CommentArea = (props) => {
-  // state = {
-  //   comments: [],
-  //   isLoading: true,
-  //   isError: false,
-  // };
-
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -42,18 +36,6 @@ const CommentArea = (props) => {
       setIsError(true);
     }
   };
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.asin !== this.props.asin) {
-  //     this.bookDataFetch();
-  //   } else {
-  //     console.log("nessun cambiamento" + this.props.asin);
-  //   }
-  // }
-
-  // componentDidMount = () => {
-  //   this.bookDataFetch();
-  // };
 
   useEffect(() => {
     bookDataFetch();
