@@ -54,9 +54,17 @@ describe("Check the cards of books", () => {
 });
 
 describe("Check comments area", () => {
-  it("should open the comments area", () => {
+  beforeEach(() => {
     render(<App />);
+  });
 
+  it("comment area should not to be rendered without a click of a card", () => {
+    const commentArea = screen.queryByTestId(/commentarea/i);
+
+    expect(commentArea).not.toBeInTheDocument();
+  });
+
+  it("should open the comments area", () => {
     const cardForTest = screen.queryAllByTestId(/cardItem/i);
 
     fireEvent.click(cardForTest[Math.floor(Math.random() * cardForTest.length)]);
@@ -64,5 +72,18 @@ describe("Check comments area", () => {
     const commentArea = screen.getByTestId(/commentarea/i);
 
     expect(commentArea).toBeInTheDocument();
+  });
+
+  it("check in comments get loaded correctly", async () => {
+    const cards = screen.queryAllByTestId(/cardItem/i);
+
+    // const selectedCard = cards[Math.floor(Math.random() * cards.length)];
+    const selectedCard = cards[0];
+
+    fireEvent.click(selectedCard);
+
+    const comments = await screen.findAllByTestId(/SingleComment/i);
+
+    expect(comments.length).toBeGreaterThan(0);
   });
 });

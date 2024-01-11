@@ -21,7 +21,7 @@ const SingleComment = ({ comment }) => {
   };
 
   return (
-    <ListGroup.Item>
+    <ListGroup.Item data-testid="SingleComment">
       {comment.comment}
       <Button variant="danger" className="ms-2" onClick={() => deleteComment(comment._id)}>
         Elimina
