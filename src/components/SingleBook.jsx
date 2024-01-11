@@ -15,6 +15,7 @@ const SingleBook = (props) => {
         style={{
           border: props.selected && props.bookId === props.book.asin ? "3px solid red" : "none",
         }}
+        data-testid="cardItem"
       >
         <Card.Img variant="top" src={props.book.img} />
         <Card.Body>
