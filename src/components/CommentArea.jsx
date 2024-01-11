@@ -42,7 +42,7 @@ const CommentArea = (props) => {
   }, [props.asin]);
 
   return (
-    <div className="text-center">
+    <div className="text-center" data-testid="CommentArea">
       {isLoading && <Loading />}
       {isError && <Error />}
       <AddComment asin={props.asin} />
